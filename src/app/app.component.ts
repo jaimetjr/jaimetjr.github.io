@@ -26,8 +26,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     let date = this.pipe.transform(this.today, 'dd/MM/YYYY');
-    console.log(date);
-
+    let time = this.pipe.transform(this.today, 'hh');
+    let ok = false;
+    if (time != null && (time >= "2" || time >= "14")) {
+      ok = true;
+    }
     switch (date) {
       case '05/06/2023':
         this.frase = this.frases[0];
@@ -51,7 +54,10 @@ export class AppComponent implements OnInit {
         this.frase = this.frases[6];
         break;
       case '12/06/2023':
-        this.frase = this.frases[7];
+        this.frase = "Frase não disponivel, aguarde ;)"
+        if (ok) {
+          this.frase = this.frases[7];
+        }
         break;
     }
   }
